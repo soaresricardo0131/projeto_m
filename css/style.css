@@ -1,0 +1,158 @@
+
+body{
+    margin:0;
+    padding: 0;
+    font-family: monospace;
+    background-color: #3b3e37;
+}
+h1,h2,h3,h4,h5{
+    margin: 0;
+    padding: 0;;
+}
+h1{
+    color: white;
+}
+h2{
+    color: #ac0d0d;
+}
+/*começo nav*/
+#header{
+    display: flex;
+    height: 85px;
+    justify-content: center;
+    background-color: #2a2829;
+    
+}
+.container{
+    display: flex;
+    justify-content: center;
+    width: 80%;
+}
+.nav_bar{
+    height: 80px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  
+    
+    
+}
+.nav_bar ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+}
+ul{
+    
+    height: 100%;
+    list-style: none;
+    width: 40%;
+    align-items: center;
+    
+
+}
+.agora{
+    color:white;
+    background-color: #ac0d0d;
+}
+li{
+    padding: 1%;
+    display: flex;
+    height: 100%;
+ 
+}
+a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #ac0d0d;
+    height: 100%;
+    width: 100%;
+   
+}
+li > a:hover{
+    color: white;
+}
+li:hover{
+    background-color: #ac0d0d;
+    
+}
+#vermelho{
+    color: #ac0d0d;
+}
+/*fim nav*/
+/*começo da area de conteudo*/
+.principal{
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+}
+.conteudo{
+    display: flex;
+    justify-content: space-between;
+
+}
+/*div esquerda*/
+.esquerda{
+    width: 63%;
+    display: flex;
+    flex-direction: column;
+}
+
+.div_ultimas{
+    display: flex;
+    background-color: #8e8e8e;
+
+    
+    border-left:5px solid #ac0d0d;
+    padding: 2%;
+}
+.ultimo_artigo, .artigos_anteriores{
+    margin-top: 2%;
+}
+.ultimo_artigo{
+    
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 2%;
+    
+}
+.descricao{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin-top: 1%;
+    
+
+}
+.descricao a{
+    margin-top: 1%;
+}
+
+.sobre_artigo{
+    display: flex;
+    justify-content: space-between;
+}
+.artigos_anteriores{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    padding: 2%;
+
+}
+.info_artigo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+/*div direita*/
+.direita{
+    width: 33%;
+    background-color: white;
+}
