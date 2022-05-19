@@ -117,9 +117,7 @@ li{
     border-left:5px solid #ac0d0d;
     padding: 2%;
 }
-.ultimo_artigo, .artigos_anteriores{
-    margin-top: 2%;
-}
+
 .ultimo_artigo{
     
     display: flex;
@@ -182,7 +180,7 @@ li{
     justify-content: space-around;
     background-color: #2a2829;
     width: 400px;
-    height: 400px;
+    height: 450px;
     color: #ac0d0d;
     
 }
