@@ -89,6 +89,8 @@ li{
 
 #vermelho{
     color: #ac0d0d;
+
+    
 }
 /*fim nav*/
 /*começo da area de conteudo*/
@@ -238,4 +240,70 @@ select{
     font-size: 18px;
     background-color: #ac0d0d;
     color: white;
+}
+/* tela sugestão */
+.div_sugestao{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2%;
+    
+}
+.div_sugestao .div_form{
+    align-items: center;
+    margin: 0;
+    padding: 1%;
+    width: 500px;
+    height: 500px;
+}
+.div_direita input{
+    
+    width: 11.2;
+
+}
+.texto{
+    margin-top: 1%;
+    color: white;
+}
+.div_sugestao .div_form .div_input{
+    display: flex;
+    flex-direction: row;
+    
+}
+.div_esquerda{
+
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    margin-right: 1%;
+}
+.div_direita{
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+#input_mensagem{
+    width: 78%;
+    height: 20%;
+}
+.div_form #btn_form{
+    
+    margin: 0 auto;
+}
+
+/* dashboard */
+.dashboard{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.dash_esquerda{
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 630px;
+    background-color: #2a2829;
 }
