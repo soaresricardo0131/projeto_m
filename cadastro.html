@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Maldito - Login</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="./js/funcoes.js"></script>
 </head>
 <body>
     <div id="header">
@@ -17,6 +18,7 @@
                     <li><a href="analises.html">Análises</a></li>
                     <li><a href="artigos.html">Artigos</a></li>
                     <li><a href="sobre.html">Sobre o Maldito</a></li>
+                    <li><a href="contato.html">Contato</a></li>
                     <li><a href="cadastro.html" class="agora">Cadastro</a></li>
                     <li><a href="login.html" >Login</a></li>
                 </ul>
@@ -32,23 +34,24 @@
                         <img src="img/cadastro.png" style="width:100%;">
                     </div>
                     <div class="div_input">
+                        <labeL>Nome:</labeL><input id="input_nome">
                         <labeL>Email:</labeL><input id="input_email">
                         <label>Senha: </label><input id="input_senha">
                         <label>Confirmar Senha: </label><input id="input_csenha">
                         <label>Survival Horror Preferido </label>
-                        <select>
+                        <select id="input_select">
                             <option value="">Selecione</option>
-                            <option value="">Resident Evil</option>
-                            <option value="">Silent Hill</option>
-                            <option value="">Alone in The Dark</option>
-                            <option value="">The Evil Within</option>
-                            <option value="">Outlast</option>
-                            <option value="">Alan Wake</option>
+                            <option value="Resident Evil">Resident Evil</option>
+                            <option value="Silent Hill">Silent Hill</option>
+                            <option value="Alone in The Dark">Alone in The Dark</option>
+                            <option value="The Evil Within">The Evil Within</option>
+                            <option value="Outlast">Outlast</option>
+                            <option value="Alan Wake">Alan Wake</option>
                         </select>
 
                     </div>
                     
-                    <button id="btn_form" onclick="">Cadastrar</button>
+                    <button id="btn_form" onclick="cadastrar()">Cadastrar</button>
 
 
                 </div>
@@ -59,3 +62,88 @@
 
 </body>
 </html>
+
+<script>
+    function cadastrar() {
+        // aguardar();
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nomeVar = input_nome.value;
+        var emailVar = input_email.value;
+        var senhaVar = input_senha.value;
+        var confirmacaoSenhaVar = input_csenha.value;
+        // var jogoVar = number(input_select.value);
+        var jogoVar = input_select.value;
+
+        if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "" || jogoVar =="" ) {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "Preencha todos os campos para prosseguir!";
+
+            finalizarAguardar();
+            return false;
+        }
+        // else {
+        //     setInterval(sumirMensagem, 5000)
+        // }
+
+        if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "Ops, e-mail inválido! Verifique e tente novamente.";
+            finalizarAguardar();
+            return false;
+        }
+        // else {
+        //     setInterval(sumirMensagem, 5000)
+        // }
+
+        if (senhaVar != confirmacaoSenhaVar) {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "As senhas inseridas devem ser iguais para prosseguir!";
+            finalizarAguardar();
+            return false;
+        }
+        // else {
+        //     setInterval(sumirMensagem, 5000)
+        // }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nomeVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+                jogoServer: jogoVar
+            })
+        }).then(function (resposta) {
+            alert("oi")
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML = "Cadastro realizado com sucesso!";
+                window.location = "login.html";
+                limparFormulario();
+                finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    // function sumirMensagem() {
+    //     cardErro.style.display = "none"
+    // }
+
+</script>

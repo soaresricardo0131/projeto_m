@@ -306,4 +306,27 @@ select{
     width: 350px;
     height: 630px;
     background-color: #2a2829;
+    align-items: center;
+    /* justify-content: space-around; */
+    
+}
+.div_botoes{
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+  
+
+}
+.dash_esquerda button{
+    background-color: #ac0d0d;
+    margin-top: 5px;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    font-size: 13px;
+    width: 100%;
+    cursor: pointer;
 }

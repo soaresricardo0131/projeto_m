@@ -4,19 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Maldito - Home</title>
+    <title>Blog Maldito - Dashboard</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="../js/funcoes.js"></script>
 </head>
-<body>
+<body onload="validarSessao()">
 
 
     <div class="dashboard">
         <div class="dash_esquerda">
             <img src="img/logo.png" style="width:250px">
-            <h1>Bem-vindo(a) <span id="nomeUser"></span></h1>
-            <button>Sugestões</button>
-            <button>Criar Postagem</button>
-            <button>Sair</button>
+            <h1>Bem-vindo(a) <span id="b_usuario">usuário</span></h1>
+            <div class="div_botoes">
+                <button>Inicio</button>
+                <button>Sugestões</button>
+                <button>Criar Postagem</button>
+                <button onclick="limparSessao()">Sair</button>
+            </div>
+            
         </div>
     </div>
 

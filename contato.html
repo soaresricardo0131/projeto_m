@@ -29,13 +29,7 @@
             </div>
         </div>
     </div>
-    <!-- <div>
-        <p>Tem uma dica de notícia? Uma ideia de artigo que gostaria de ver publicado
-         por aqui (ou quem sabe, até de escrever pra gente)? 
-         Pensou em alguma ideia de novo quadro ou conteúdo? 
-         Não deixe de entrar em contato pelo e-mail contato@blogmaldito.com.br e ajude o Blog Maldito
-          a se tornar um site cada vez mais maldito.</p>
-    </div> -->
+
 
         <div class="div_sugestao">
             
@@ -69,9 +63,93 @@
                 <!-- <input id="input_mensagem"> -->
                 <textarea id="input_mensagem" maxlength="300"></textarea>
               
-                <button id="btn_form" onclick="">Enviar</button>
+                <button id="btn_form" onclick="contato()">Enviar</button>
             </div>
 
         </div>
 </body>
 </html>
+
+<script>
+    function contato() {
+        // aguardar();
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        
+        var emailVar = input_email.value;
+        var assuntoVar = input_assunto.value;
+
+        var mensagemVar = input_mensagem.value;
+
+        if (emailVar == "" || assuntoVar == "" || mensagemVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "Preencha todos os campos para prosseguir!";
+
+            finalizarAguardar();
+            return false;
+        }
+        // else {
+        //     setInterval(sumirMensagem, 5000)
+        // }
+
+        // if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
+        //     cardErro.style.display = "block"
+        //     mensagem_erro.innerHTML = "Ops, e-mail inválido! Verifique e tente novamente.";
+        //     finalizarAguardar();
+        //     return false;
+        // }
+        // // else {
+        // //     setInterval(sumirMensagem, 5000)
+        // // }
+
+        // if (senhaVar != confirmacaoSenhaVar) {
+        //     cardErro.style.display = "block"
+        //     mensagem_erro.innerHTML = "As senhas inseridas devem ser iguais para prosseguir!";
+        //     finalizarAguardar();
+        //     return false;
+        // }
+        // // else {
+        // //     setInterval(sumirMensagem, 5000)
+        // // }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/contato", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+              
+                emailServer: emailVar,
+                assuntoServer: assuntoVar,
+                mensagemServer: mensagemVar
+            })
+        }).then(function (resposta) {
+            alert("oi")
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML = "Cadastro realizado com sucesso!";
+                window.location = "login.html";
+                limparFormulario();
+                finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    // function sumirMensagem() {
+    //     cardErro.style.display = "none"
+    // }
+
+</script>
