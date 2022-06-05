@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Maldito - Dashboard</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="../js/funcoes.js"></script>
+    <script src="js/funcoes.js"></script>
     <style>
         
     </style>
@@ -18,19 +18,13 @@
             <div class="dash_esquerda">
                 <img src="img/logo.png" style="width:250px">
                 <h1>Bem-vindo(a) <span id="b_usuario">usuário</span></h1>
-                <div class="div_botoes">
-                    <button>Inicio</button>
-                    <button>Sugestões</button>
-                    <button>Criar Postagem</button>
-                    <button onclick="limparSessao()">Sair</button>
-                </div>
-
-                <!-- <ul class="div_botoes">
-                    <li>Inicio</li>
-                    <li><a class="agora">Sugestões</a></li>
-                    <li>Criar Postagem</li>
-                    <li onclick="limparSessao()">Sair</li>
-                </ul> -->
+                <ul class="ul_botoes">
+                    <li><a href="dashboard.html">Inicio</a> </li>
+                    <li><a href="sugestoes.html">Sugestões</a> </li>
+                    <li><a href="post.html">Criar Postagem</a> </li>
+                    <li><a href="historico.html">Historico de Postagem</a> </li>
+                    <li onclick="limparSessao()">Sair</button>
+                </ul>
                 
             </div>
         </div>

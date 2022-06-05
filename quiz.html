@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Maldito - Postagem</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="../js/funcoes.js"></script>
+
+</head>
+<body onload="validarSessao()">
+    <div class="dash_principal">
+        <div class="dashboard">
+            <div class="dash_esquerda">
+                <img src="img/logo.png" style="width:250px">
+                <h1>Olá, <span id="b_usuario">usuário</span></h1>
+                <ul class="ul_botoes">
+                    <li><a href="dashboard.html">Inicio</a> </li>
+                    <li><a href="sugestoes.html">Sugestões</a> </li>
+                    <li><a href="post.html">Criar Postagem</a> </li>
+                    <li><a href="historico.html">Historico de Postagem</a> </li>
+                    <li onclick="limparSessao()">Sair</button>
+                </ul>
+
+            </div>
+        </div>
+
+
+        <div class="div_sugestao">
+
+            <form id="form_quiz" method="post" onsubmit="return publicar()" class="div_quiz">
+                <h1><span class="vermelho">Quiz</span> </h1>
+
+                
+                <div class="div_perguntas">
+                    <label>1) Qual personagem abaixo é fundador da Umbrela?:</label>
+                    <ul class="div_alternativas">
+                        <li><input type="radio" value="a" name="pergunta1"><label>Albert Wesker</label></li>
+                        <li><input type="radio" value="b" name="pergunta1"><label>William Birkin</label></li>
+                        <li><input type="radio" value="c" name="pergunta1"><label>Ozwell E. Spencer</label></li>
+                    </ul>
+                </div>
+
+                <div class="div_perguntas">
+                    <label>2) "You want S.T.A.R.S? I'll give you S.T.A.R.S!" É uma frase de :</label>
+                    <ul class="div_alternativas">
+                        <li><input type="radio" value="a" name="pergunta2"><label>Chris Redfield</label></li>
+                        <li><input type="radio" value="b" name="pergunta2"><label>Jill Valentine</label></li>
+                        <li><input type="radio" value="c" name="pergunta2"><label>Barry Burton</label></li>
+                    </ul>
+                </div>
+
+                <div class="div_perguntas">
+                    <label>3) Em qual jogo a personagem Ada Wong aparece primeiro?</label>
+                    <ul class="div_alternativas">
+                        <li><input type="radio" value="a" name="pergunta3"><label>Residen evil 4</label></li>
+                        <li><input type="radio" value="b" name="pergunta3"><label>Resident Evil 2</label></li>
+                        <li><input type="radio" value="c" name="pergunta3"><label>Resident Evil 6</label></li>
+                    </ul>
+                </div>
+
+                <div class="div_perguntas">
+                    <label>4) Qual o nome da filha de Ethan Winters?</label>
+                    <ul class="div_alternativas">
+                        <li><input type="radio" value="a" name="pergunta4"><label>Rosemary</label></li>
+                        <li><input type="radio" value="b" name="pergunta4"><label>Eveline</label></li>
+                        <li><input type="radio" value="c" name="pergunta4"><label>Mia</label></li>
+                    </ul>
+                </div>
+
+                <div class="div_perguntas">
+                    <label>5) Qual foi o último Resident Evil com câmera fixa?</label>
+                    <ul class="div_alternativas">
+                        <li><input type="radio" value="a" name="pergunta5"><label>Resident Evil Zero</label></li>
+                        <li><input type="radio" value="b" name="pergunta5"><label>Resident Evil - CODE: Veronica</label></li>
+                        <li><input type="radio" value="c" name="pergunta5"><label>Resident Evil: Outbreak file#2</label></li>
+                    </ul>
+                </div>
+
+                <div class="div_perguntas">
+                    <label>6) Qual desses produtos de RE não faz parte da cronologia?</label>
+                    <ul class="div_alternativas">
+                        <li><input type="radio" value="a" name="pergunta6"><label>Resident Evil: O Incidente de Caliban Cove</label></li>
+                        <li><input type="radio" value="b" name="pergunta6"><label>Resident Evil: No Escuro Absoluto</label></li>
+                        <li><input type="radio" value="c" name="pergunta6"><label>Resident Evil: Degeneração</label></li>
+                    </ul>
+                </div>
+                <button id="btn_post" >Enviar</button>
+                <!-- <input id="input_mensagem"> -->
+                
+            </form>
+     
+
+        </div>
+</body>
+</html>
+
+<script>
+    
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+    
+
+</script>

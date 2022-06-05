@@ -19,6 +19,19 @@ function listarPosts(req, res) {
     });
 }
 
+function listarJogos(req, res) {
+    postModel.listarJogos().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
 
 function listarUsuario(req, res) {
     var idUsuario = req.params.idUsuario;
@@ -44,12 +57,114 @@ function listarUsuario(req, res) {
             }
         );
 }
+
+function publicar(req, res) {
+    var titulo = req.body.titulo;
+    var imagem = req.body.imagem;
+    var mensagem = req.body.mensagem;
+    var idUsuario = req.params.idUsuario;
+
+ 
+        postModel.publicar(titulo, imagem,mensagem, idUsuario)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            )
+            .catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+    function editarPost(req, res) {
+    var novoTitulo = req.body.titulo;
+    var novaImagem = req.body.imagem;
+    var novaMensagem = req.body.mensagem;
+    var idPost = req.params.idPostagem;
+
+    postModel.editarPost(novoTitulo, novaImagem,novaMensagem, idPost)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+
+}
+
+// function deletar(req, res) {
+//     var idAviso = req.params.idAviso;
+
+//     avisoModel.deletar(idAviso)
+//         .then(
+//             function (resultado) {
+//                 res.json(resultado);
+//             }
+//         )
+//         .catch(
+//             function (erro) {
+//                 console.log(erro);
+//                 console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
+//                 res.status(500).json(erro.sqlMessage);
+//             }
+//         );
+// }
+
+
+function deletar(req, res) {
+    var idPostagem = req.params.idPostagem;
+
+    postModel.deletar(idPostagem)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+
+function exibirArtigos(req, res) {
+    var idPostagem = req.params.idPostagem;
+    postModel.exibirArtigos(idPostagem).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
     testar,
     listarPosts,
-     listarUsuario
+     listarUsuario,
+     editarPost,
+     publicar,
+     exibirArtigos,
+     listarJogos,
     // pesquisarDescricao,
 
     // editar,
-    // deletar
+     deletar
 }

@@ -8,6 +8,9 @@
     <script src="./js/funcoes.js"></script>
 </head>
 <body>
+    <div id="mensagem">
+        
+    </div>
     <div id="header">
         <div class="container">
             <div class="nav_bar">
@@ -15,7 +18,7 @@
                 <!-- <h1>Blog <span id="vermelho">Maldito</span></h1> -->
                 <ul>
                     <li><a href="index.html" >Inicio</a></li>
-                    <li><a href="analises.html">Análises</a></li>
+                    <!-- <li><a href="analises.html">Análises</a></li> -->
                     <li><a href="artigos.html">Artigos</a></li>
                     <li><a href="sobre.html">Sobre o Maldito</a></li>
                     <li><a href="contato.html">Contato</a></li>
@@ -57,14 +60,14 @@
         var senhaVar = input_senha.value;
 
         if (emailVar == "" || senhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            finalizarAguardar();
+            mensagem.style.display = "block"
+            mensagem.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            // finalizarAguardar();
             return false;
         }
-        // else {
-        //     setInterval(sumirMensagem, 5000)
-        // }
+        else {
+            setInterval(sumir_div, 5000)
+        }
 
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
@@ -91,6 +94,7 @@
                     sessionStorage.EMAIL_USUARIO = json.emailUsuario;
                     sessionStorage.NOME_USUARIO = json.nomeUsuario;
                     sessionStorage.ID_USUARIO = json.idUsuario;
+                    sessionStorage.JOGO_USUARIO = json.jogoUsuario;
 
                     setTimeout(function () {
                         window.location = "./dashboard.html";

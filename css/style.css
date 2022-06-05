@@ -16,6 +16,17 @@ h1{
 h2{
     color: #ac0d0d;
 }
+
+#mensagem{
+    margin-left: 35%;
+    margin-top: 15%;
+    position: absolute;
+    background-color: #8e8e8e;
+    color: #ac0d0d;
+    width: 350px;
+    height: 250px;
+    display: none;
+}
 /*começo nav*/
 #header{
     display: flex;
@@ -88,13 +99,13 @@ li{
 }
 
 
-#vermelho{
+.vermelho{
     color: #ac0d0d;
 
     
 }
-/*fim nav*/
-/*começo da area de conteudo*/
+/*=====================================fim nav*/
+/*=====================================começo da area de conteudo*/
 .principal{
     display: flex;
     justify-content: center;
@@ -104,6 +115,11 @@ li{
     display: flex;
     justify-content: space-between;
 
+}
+.conteudo.container{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
 }
 /*div esquerda*/
 .esquerda{
@@ -134,6 +150,7 @@ li{
     flex-direction: column;
     background-color: white;
     margin-top: 1%;
+    margin-left: 5px;
     
 
 }
@@ -192,11 +209,7 @@ li{
 }
 .div_input{
     display: flex;
-    flex-direction: column;
-
-    
-
-    
+    flex-direction: column; 
 }
 .div_form input{
     
@@ -232,8 +245,6 @@ label{
 #btn_form:hover{
     background-color: white;
     color: #ac0d0d;
-    
-
 }
 select{
     width: 100%;
@@ -242,7 +253,7 @@ select{
     background-color: #ac0d0d;
     color: white;
 }
-/* tela sugestão */
+/*=============================================== TELA SUGESTÃO ======================================*/
 .div_sugestao{
 
     display: flex;
@@ -295,16 +306,13 @@ select{
     margin: 0 auto;
 }
 
-/* dashboard */
+/* =============================================DASHBOARD =====================================*/
 .dash_principal{
-    display: flex;
-    flex-direction: row;
-    
+    display: flex;  
 }
 .dashboard{
-    /* display: flex; */
-    flex-direction: column;
-    justify-content: space-around;
+    display: flex;
+    justify-content: space-between;
 }
 .dash_esquerda{
     display: flex;
@@ -312,17 +320,35 @@ select{
     width: 350px;
     height: 630px;
     background-color: #2a2829;
-    align-items: center;
-    /* justify-content: space-around; */
-    
+    align-items: center;   
 }
 .div_botoes{
     border: 1px solid;
     display: flex;
     flex-direction: column;
     width: 150px;
-  
+}
 
+.ul_botoes{
+
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    padding: 0;
+}
+
+.ul_botoes a{
+
+    text-decoration: none;
+    color: white;
+} 
+.ul_botoes li {
+    display: flex;
+    height: 50px;
+    width: 100%;
+    margin-top: 4px;
+    background-color: #ac0d0d;
+    
 }
 .dash_esquerda button , .publicacao-btn-editar{
     text-decoration: none;
@@ -345,29 +371,70 @@ select{
     
 
 }
-/* mural de sugestões */
+/* =====================================PAINEL DIREITO: MURAL, DASH ==================================*/
 .dash-right{
     display: flex;
     flex-direction: row;
-    margin: 0 auto;
-    
-    
+    margin: 0 auto;   
+}
+.container_dash{
+    border: #ac0d0d solid 1px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.dash{
+    border-bottom: 5px solid red;
+    /* display: flex; */
+    width: 600px;
+    height: 350px;
+    background-color: #2a2829;
+}
+.feed-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
 }
 .div-results{
     display: flex;
-    
-    
-    
+   
 }
 .publicacao{
     margin-top:5px ;
-    border-bottom: #ac0d0d 5px solid;
+    border: #ac0d0d 3px solid;
+    margin-left: 2%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    padding: 5%;
+    padding: 1%;
     background-color: #2a2829;
     color: white;
     width: 400px;
     height: 300px;
+}
+
+/* =============================================TELA QUIZ =====================================*/
+
+.div_quiz{
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+    background-color: #2a2829;
+    width: 400px;
+
+    
+}
+.div_perguntas{
+    display: flex;
+    flex-direction: column;
+    border-bottom: 5px solid #ac0d0d;
+}
+.div_alternativas{
+    display: flex;
+    flex-direction: column;
 }

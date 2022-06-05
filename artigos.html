@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Maldito - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/funcoes.js"></script>
+</head>
+<body onload="atualizarFeed()">
+    <div id="header">
+        <div class="container">
+            <div class="nav_bar">
+                <img src="img/logo.png" style="width:250px">
+                
+                
+                <ul>
+                    <li><a href="index.html" class="agora">Inicio</a></li>
+                    <!-- <li><a href="analises.html">Análises</a></li> -->
+                    <li><a href="artigos.html">Artigos</a></li>
+                    <li><a href="sobre.html">Sobre o Maldito</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                    <li><a href="cadastro.html">Cadastro</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+
+            </div>
+
+        
+        </div>
+
+    </div>
+
+    <div class="principal">
+        <div class="conteudo container">
+            <div class="esquerda">
+                <!-- <div class="div_ultimas">
+                    <h2>Destaque</h2>
+                </div> -->
+
+                <div class="ultimo_artigo"id="ultimo_artigo">
+                   
+                    
+
+
+                </div>
+                <br>
+
+
+            <!-- <div class="direita">
+                <div class="div_ultimas">
+                    <h2>Categorias</h2>
+                </div>
+                <br>
+                <div class="div_ultimas">
+                    <h2>Ultimas Análises</h2>
+                </div>
+
+            </div> -->
+            
+        </div>
+        
+
+
+    </div>
+    <!-- <div class="div-results">
+        <div id="feed_container" class="feed-container">
+        </div>
+    </div> -->
+    <div id="footer">
+        <div class="container">
+            <div class="footer_esquerdo">
+                
+            </div>
+
+            <div class="footer_direito">
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    
+
+function atualizarFeed() {
+    
+        //erro();
+        var idPostagem = sessionStorage.ID_POSTAGEM;
+        fetch(`/post/exibirArtigos/${idPostagem}`).then(function (resposta) {
+            if (resposta.ok) {
+                
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("ultimo_artigo");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum resultado encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    var feed = document.getElementById("ultimo_artigo");
+                    feed.innerHTML = "";
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+                        ultimo_artigo.innerHTML +=
+                        `
+                        <img src="${publicacao.imgPostagem}" alt="" width="100%">
+                    <h2>${publicacao.tituloPostagem}</h2>
+                    <div class="sobre_artigo"><h3>Por ${publicacao.nomeUsuario},
+                        <span class="data_post">${publicacao.datapost}</span></h3>
+                        <a href="" class="tags">artigos</a>
+                    </div>
+                    <div class="descricao">
+                        <h4>
+                            ${publicacao.conteudoPostagem}
+                        </h4>
+                    </div>
+                        
+                        
+                        `
+                    }
+
+                    // finalizarAguardar();
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+            // finalizarAguardar();
+        });
+    }
+</script>

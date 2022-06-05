@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Maldito - Home</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/funcoes.js"></script>
 </head>
-<body>
+<body onload="atualizarFeed()">
+
+    
     <div id="header">
         <div class="container">
             <div class="nav_bar">
@@ -16,7 +19,7 @@
                 
                 <ul>
                     <li><a href="index.html" class="agora">Inicio</a></li>
-                    <li><a href="analises.html">Análises</a></li>
+                    <!-- <li><a href="analises.html">Análises</a></li> -->
                     <li><a href="artigos.html">Artigos</a></li>
                     <li><a href="sobre.html">Sobre o Maldito</a></li>
                     <li><a href="contato.html">Contato</a></li>
@@ -67,15 +70,8 @@
                 <div class="artigos_anteriores">
                     
                     
-                    <div class="info_artigo">
-                        <img src="img/capa_2.jpg" alt="" width="50%">
-                        <h2>Precisamos falar sobre o Resident Evil 2 Remake</h2>
-
-                    </div>
-                    
-                    <div class="sobre_artigo"><h3>Por Ricardo Soares,
-                        <span class="data_post">01/05/2015</span></h3>
-                        <a href="" class="tags">artigos</a>
+                    <div id="info_artigo">
+                        
                     </div>
 
                 </div>
@@ -97,6 +93,10 @@
 
 
     </div>
+    <!-- <div class="div-results">
+        <div id="feed_container" class="feed-container">
+        </div>
+    </div> -->
     <div id="footer">
         <div class="container">
             <div class="footer_esquerdo">
@@ -110,3 +110,111 @@
     </div>
 </body>
 </html>
+
+<script>
+    
+
+function atualizarFeed() {
+        //erro();
+        fetch("/post/listarPosts").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    var feed = document.getElementById("info_artigo");
+                    var mensagem = document.createElement("span");
+                    mensagem.innerHTML = "Nenhum artigo encontrado."
+                    feed.appendChild(mensagem);
+                    throw "Nenhum artigo ainda!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    var feed = document.getElementById("info_artigo");
+                    feed.innerHTML = "";
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+                        info_artigo.innerHTML +=
+                        `
+                        <div class="info_artigo">
+                            
+                        <img src="${publicacao.imgPostagem}" id="img_post" alt="" width="45%">
+                        
+                       
+
+                        <div class="descricao">
+                            <h2>${publicacao.tituloPostagem}</h2>
+                        <h4>
+                            ${publicacao.conteudoPostagem}
+                        </h4>
+                        <a href="artigos.html" id="link_artigo${publicacao.idPostagem}" value="${publicacao.idPostagem}" onclick="ler_artigo(${publicacao.idPostagem})">Leia mais...</a>
+                    </div>
+
+                        </div>
+                        
+
+                    </div>
+                    
+                    <div class="sobre_artigo"><h3>Por ${publicacao.nomeUsuario},
+                        <span class="data_post">${publicacao.dataPost}</span></h3>
+                        <a href="artigos.html" class="tags">artigos</a>
+                    </div>
+                        
+                        
+                        `
+
+                        
+                      
+                      
+                      
+                    }
+
+                    // finalizarAguardar();
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+            // finalizarAguardar();
+        });
+    }
+
+    function ler_artigo(idPostagem){
+        sessionStorage.ID_POSTAGEM = idPostagem;
+        // var postagemVar =  idPostagem;
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    // Enviando o valor da nova input
+    fetch(`/post/exibirArtigos/:${idPostagem}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            // crie um atributo que recebe o valor recuperado aqui
+            // Agora vá para o arquivo routes/usuario.js
+            artigoServer: postagemVar,
+        })
+    }).then(function (resposta) {
+        console.log("ESTOU NO THEN DO lerArtigos()!")
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+            
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "Cadastro realizado com sucesso!";
+            window.location = "artigos.html";
+            limparFormulario();
+            finalizarAguardar();
+        } else {
+            throw ("Houve um erro ao tentar realizar o cadastro!");
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+    });
+
+    return false;
+}
+</script>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Maldito - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/funcoes.js"></script>
+    <style>
+        
+    </style>
+</head>
+<body onload="validarSessao(), atualizarFeed()">
+
+    <div class="dash_principal">
+        <div class="dashboard">
+            <div class="dash_esquerda">
+                <img src="img/logo.png" style="width:250px">
+                <h1>Bem-vindo(a) <span id="b_usuario">usuário</span></h1>
+                <ul class="ul_botoes">
+                    <li><a href="dashboard.html">Inicio</a> </li>
+                    <li><a href="sugestoes.html">Sugestões</a> </li>
+                    <li><a href="post.html">Criar Postagem</a> </li>
+                    <li><a href="historico.html">Historico de Postagem</a> </li>
+                    <li onclick="limparSessao()">Sair</button>
+                </ul>
+
+                <!-- <ul class="div_botoes">
+                    <li>Inicio</li>
+                    <li><a class="agora">Sugestões</a></li>
+                    <li>Criar Postagem</li>
+                    <li onclick="limparSessao()">Sair</li>
+                </ul> -->
+                
+            </div>
+        </div>
+    
+        <div class="dash-right">
+    
+            
+
+            <div class="div_sugestao">
+            
+            
+
+
+                
+           
+        <div class="div_form">
+            <h1>Edição de <span id="vermelho">Postagem</span> </h1>
+
+             <div class="div_input">
+                 <div class="div_esquerda">
+                    <labeL>Titulo:</labeL><br>
+                    <label>Imagem: </label>
+                 </div>
+               
+                <div class="div_direita">
+                    <input id="input_email">
+                    <input id="input_assunto">
+                </div>
+               
+            </div>
+
+           <label>Conteúdo:</label>
+            <!-- <input id="input_mensagem"> -->
+            <textarea id="input_mensagem" maxlength="300"></textarea>
+          
+            <button id="btn_form" onclick="contato()">Enviar</button>
+        </div>
+
+    </div>
+                
+        </div>
+    </div>
+
+
+</body>
+</html>
+
+<script>
+    function listarInfosDeUm() {
+        console.log("Criar função de trazer informações de post escolhido");
+    }
+
+    function editarPost() { //`/post/listarPosts/${idUsuario}`)
+        fetch(`//editarPost/${sessionStorage.getItem("ID_POSTAGEM_EDITANDO")}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                descricao: textarea_descricao.value
+            })
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+                window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
+                window.location = "historico.html"
+            } else if (resposta.status == 404) {
+                window.alert("Deu 404!");
+            } else {
+                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
+
+</script>

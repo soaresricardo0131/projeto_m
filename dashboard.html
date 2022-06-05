@@ -6,24 +6,211 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Maldito - Dashboard</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="../js/funcoes.js"></script>
+    <script src="js/funcoes.js"></script>
+    <!-- scripts do Chart.js -->
+    <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
+
 </head>
-<body onload="validarSessao()">
+
+<body onload="validarSessao(), atualizarFeed()"">
+
 
 
     <div class="dashboard">
         <div class="dash_esquerda">
             <img src="img/logo.png" style="width:250px">
-            <h1>Bem-vindo(a) <span id="b_usuario">usuário</span></h1>
-            <div class="div_botoes">
-                <button>Inicio</button>
-                <button>Sugestões</button>
-                <button>Criar Postagem</button>
-                <button onclick="limparSessao()">Sair</button>
-            </div>
+            <h1>Olá <span id="b_usuario">usuário</span></h1>
+            <ul class="ul_botoes">
+                <li><a href="dashboard.html">Inicio</a> </li>
+                <li><a href="sugestoes.html">Sugestões</a> </li>
+                <li><a href="post.html">Criar Postagem</a> </li>
+                <li><a href="historico.html">Historico de Postagem</a> </li>
+                <li onclick="limparSessao()">Sair</button>
+            </ul>
             
+        </div>
+        <div class="container_dash">
+
+            <div>
+                <h1 class="tituloGrafico">
+                    Bem-vindo(a), <span class="vermelho">Estranho(a)!</span> Seu jogo favorito é:
+                    <span id="nome_jogo" class="vermelho">jogo</span>.<br>
+                    Você faz parte dos <span id="num_jogo" class="vermelho">numero</span> usuários que gostam dele.
+                </h1>
+            </div>
+
+            <div class="dash">
+                <div>
+                    <h3 class="tituloGrafico">
+                        Os jogos de <span id="vermelho">Terror</span> favoritos dos Usuários
+                    </h3>
+                </div>
+                <div class="graph">
+                    <canvas id="canvas_grafico"></canvas>
+                </div>
+            </div>
         </div>
     </div>
 
+    
+
 </body>
 </html>
+
+<script>
+
+    var alan_wake = 0;
+    var alone_dark = 0;
+    var dead_space = 0;
+    var outlast = 0;
+    var resident_evil =0;
+    var silent_hill = 0;
+    var evil_within = 0;
+    var jogo = sessionStorage.JOGO_USUARIO;
+    
+
+    let proximaAtualizacao;
+
+    window.onload = obterDadosGrafico();
+
+
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    
+    nome_jogo.innerHTML = sessionStorage.JOGO_USUARIO;
+    
+
+    // O gráfico é construído com três funções:
+    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+ 
+    function obterDadosGrafico() {
+        
+
+        if (proximaAtualizacao != undefined) {
+            clearTimeout(proximaAtualizacao);
+        }
+
+        fetch(`/medidas/ultimas/`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    alan_wake = resposta[0].re;
+                    alone_dark = resposta[1].re;
+                    dead_space = resposta[2].re;
+                    outlast = resposta[3].re;
+                    resident_evil = resposta[4].re;
+                    silent_hill = resposta[5].re;
+                    evil_within = resposta[6].re;
+
+                    plotarGrafico(resposta);
+                    
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+    function plotarGrafico(resposta) {
+
+        carregar_jogo();
+        
+        console.log('iniciando plotagem do gráfico...');
+
+        const nomes = [
+            'Quantidade de usuários'
+        ];
+
+        const data = {
+            labels: nomes,
+            datasets: [{
+            label: `${resposta[0].jogousuario}`,
+            backgroundColor: '#648498',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [alan_wake],
+            },
+
+            {
+            label: `${resposta[1].jogousuario}`,
+            backgroundColor: '#7a1e14',
+            borderColor: 'rgb(0, 255, 255)',
+            data: [alone_dark],
+            },
+            {
+            label: `${resposta[2].jogousuario}`,
+            backgroundColor: '#1c3040',
+            borderColor: 'rgb(0, 255, 255)',
+            data: [dead_space],
+            },
+
+            {
+            label: `${resposta[3].jogousuario}`,
+            backgroundColor: '#80b07e',
+            borderColor: 'rgb(0, 255, 255)',
+            data: [outlast],
+            },
+            {
+            label: `${resposta[4].jogousuario}`,
+            backgroundColor: '#cc0404',
+            borderColor: 'rgb(0, 255, 255)',
+            data: [resident_evil],
+            },
+            {
+            label: `${resposta[5].jogousuario}`,
+            backgroundColor: '#a9a9a9',
+            borderColor: 'rgb(0, 255, 255)',
+            data: [silent_hill],
+            },
+            {
+            label: `${resposta[6].jogousuario}`,
+            backgroundColor: '#f70202',
+            borderColor: 'rgb(0, 255, 255)',
+            data: [evil_within],
+            }
+
+            ]
+        };
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {}
+        };
+        const grafico = new Chart(
+            document.getElementById('canvas_grafico'),
+            config
+        );
+
+            }
+ function carregar_jogo(){
+    if(jogo == 'Alan Wake'){
+        num_jogo.innerHTML = alan_wake
+    }else if(jogo == 'Alone in the dark'){
+        num_jogo.innerHTML = alone_dark
+    }
+    else if(jogo == 'Dead Space'){
+        num_jogo.innerHTML = dead_space
+    }
+    else if(jogo == 'Outlast'){
+        num_jogo.innerHTML = outlast
+    }
+    else if(jogo == 'Resident Evil'){
+        num_jogo.innerHTML = resident_evil
+    }
+    else if(jogo == 'Silent Hill'){
+        num_jogo.innerHTML = silent_hill
+    }else{
+        num_jogo.innerHTML = evil_within
+    }
+        
+    }
+ 
+
+</script>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Maldito - Postagem</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="../js/funcoes.js"></script>
+    <script src="js/funcoes.js"></script>
     <!-- <style>
         *{
             border: 1px solid blue;
@@ -18,19 +18,13 @@
             <div class="dash_esquerda">
                 <img src="img/logo.png" style="width:250px">
                 <h1>Bem-vindo(a) <span id="b_usuario">usuário</span></h1>
-                <div class="div_botoes">
-                    <button>Inicio</button>
-                    <button>Sugestões</button>
-                    <button>Criar Postagem</button>
-                    <button onclick="limparSessao()">Sair</button>
-                </div>
-
-                <!-- <ul class="div_botoes">
-                    <li>Inicio</li>
-                    <li><a class="agora">Sugestões</a></li>
-                    <li>Criar Postagem</li>
-                    <li onclick="limparSessao()">Sair</li>
-                </ul> -->
+                <ul class="ul_botoes">
+                    <li><a href="dashboard.html">Inicio</a> </li>
+                    <li><a href="sugestoes.html">Sugestões</a> </li>
+                    <li><a href="post.html">Criar Postagem</a> </li>
+                    <li><a href="historico.html">Historico de Postagem</a> </li>
+                    <li onclick="limparSessao()">Sair</button>
+                </ul>
                 
             </div>
         </div>
@@ -44,7 +38,7 @@
                 
            
             <form id="form_postagem" method="post" onsubmit="return publicar()" class="div_form">
-                <h1>Criar <span id="vermelho">Postagem</span> </h1>
+                <h1>Criar <span class="vermelho">Postagem</span> </h1>
             
                 
 
@@ -64,7 +58,7 @@
 
                <label>Conteúdo:</label>
                 <!-- <input id="input_mensagem"> -->
-                <textarea id="input_mensagem" maxlength="300"></textarea>
+                <textarea id="input_mensagem"></textarea>
               
                 <button id="btn_post" >Enviar</button>
             </form>
@@ -94,7 +88,7 @@
             mensagem: form_postagem.input_mensagem.value,
         }
 
-        fetch(`/avisos/publicar/${idUsuario}`, {
+        fetch(`/post/publicar/${idUsuario}`, {
             method: "post",
             headers: {
                 "Content-Type": "application/json"
@@ -106,7 +100,7 @@
 
             if (resposta.ok) {
                 window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
-                window.location = "/dashboard/mural.html";
+                window.location = "historico.html";
                 limparFormulario();
                 finalizarAguardar();
             } else if (resposta.status == 404) {
