@@ -4,17 +4,28 @@ function validarSessao() {
 
     var email = sessionStorage.EMAIL_USUARIO;
     var nome = sessionStorage.NOME_USUARIO;
-    var id = sessionStorage.ID_USUARIO;
+    var idUsuario = sessionStorage.ID_USUARIO;
 
     var b_usuario = document.getElementById("b_usuario");
 
-    if (email != null && id != null) {
+    if (email != null && nome != null) {
         // window.alert(`Seja bem-vindo, ${nome}!`);
         b_usuario.innerHTML = nome;
 
         // finalizarAguardar();
     } else {
         window.location = "../login.html";
+    }
+}
+function validarRanking() {
+    // aguardar();
+
+    var ranking = sessionStorage.EMAIL_USUARIO;
+
+    var b_usuario = document.getElementById("b_usuario");
+
+    if (ranking == null) {
+        window.location = "../login2.html";
     }
 }
 
@@ -31,15 +42,15 @@ function aguardar() {
     divAguardar.style.display = "flex";
 }
 
-function finalizarAguardar(texto) {
-    var divAguardar = document.getElementById("div_aguardar");
-    divAguardar.style.display = "none";
+// function finalizarAguardar(texto) {
+//     var divAguardar = document.getElementById("div_aguardar");
+//     divAguardar.style.display = "none";
 
-    var divErrosLogin = document.getElementById("div_erros_login");
-    if (texto) {
-        divErrosLogin.innerHTML = texto;
-    }
-}
+//     var divErrosLogin = document.getElementById("div_erros_login");
+//     if (texto) {
+//         divErrosLogin.innerHTML = texto;
+//     }
+// }
 
 
 // modal
@@ -51,5 +62,9 @@ function mostrarModal() {
 function fecharModal() {
     var divModal = document.getElementById("div_modal");
     divModal.style.display = "none";
+}
+
+function sumirMensagem() {
+    cardErro.style.display = "none"
 }
 

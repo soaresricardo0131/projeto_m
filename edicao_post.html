@@ -4,25 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Maldito - Dashboard</title>
+    <title>Blog Maldito - Edição</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/funcoes.js"></script>
     <style>
         
     </style>
 </head>
-<body onload="validarSessao(), atualizarFeed()">
+<body onload="validarSessao()">
 
     <div class="dash_principal">
         <div class="dashboard">
             <div class="dash_esquerda">
-                <img src="img/logo.png" style="width:250px">
-                <h1>Bem-vindo(a) <span id="b_usuario">usuário</span></h1>
+                <img src="img/logo.png" style="width:250px" class="dash_logo">
+            <h1 class="dash_h1">Olá <span id="b_usuario">usuário</span><br>
+                seja bem vindo(a)!</h1>
                 <ul class="ul_botoes">
                     <li><a href="dashboard.html">Inicio</a> </li>
                     <li><a href="sugestoes.html">Sugestões</a> </li>
                     <li><a href="post.html">Criar Postagem</a> </li>
                     <li><a href="historico.html">Historico de Postagem</a> </li>
+                    <li><a href="quiz.html">Quiz</a> </li>
                     <li onclick="limparSessao()">Sair</button>
                 </ul>
 
@@ -57,8 +59,8 @@
                  </div>
                
                 <div class="div_direita">
-                    <input id="input_email">
-                    <input id="input_assunto">
+                    <input id="input_titulo">
+                    <input id="input_imagem">
                 </div>
                
             </div>
@@ -67,7 +69,7 @@
             <!-- <input id="input_mensagem"> -->
             <textarea id="input_mensagem" maxlength="300"></textarea>
           
-            <button id="btn_form" onclick="contato()">Enviar</button>
+            <button id="btn_form" onclick="editarPost()">Enviar</button>
         </div>
 
     </div>
@@ -85,13 +87,24 @@
     }
 
     function editarPost() { //`/post/listarPosts/${idUsuario}`)
-        fetch(`//editarPost/${sessionStorage.getItem("ID_POSTAGEM_EDITANDO")}`, {
+
+    var ImagemVar = input_imagem.value;
+    var titulovar = input_titulo.value;
+    var mensagemVar = input_mensagem.value
+    var idPostagem = sessionStorage.getItem("ID_POSTAGEM_EDITANDO");
+
+        fetch(`/editarPost/${sessionStorage.getItem("ID_POSTAGEM_EDITANDO")}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                descricao: textarea_descricao.value
+                
+                imagemServer: ImagemVar,
+                tituloServer: titulovar,
+                mensagemServer: mensagemVar,
+                idServer: idPostagem
+
             })
         }).then(function (resposta) {
 

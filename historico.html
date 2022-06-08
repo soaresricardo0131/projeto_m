@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Maldito - Dashboard</title>
+    <title>Blog Maldito - Histórico</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/funcoes.js"></script>
     <style>
@@ -13,21 +13,23 @@
 </head>
 <body onload="validarSessao(), atualizarFeed()">
 
-    <div class="dash_principal">
-        <div class="dashboard">
-            <div class="dash_esquerda">
-                <img src="img/logo.png" style="width:250px">
-                <h1>Bem-vindo(a) <span id="b_usuario">usuário</span></h1>
-                <ul class="ul_botoes">
-                    <li><a href="dashboard.html">Inicio</a> </li>
-                    <li><a href="sugestoes.html">Sugestões</a> </li>
-                    <li><a href="post.html">Criar Postagem</a> </li>
-                    <li><a href="historico.html">Historico de Postagem</a> </li>
-                    <li onclick="limparSessao()">Sair</button>
-                </ul>
-                
-            </div>
+    <div class="dashboard">
+        
+        <div class="dash_esquerda">
+            <img src="img/logo.png" style="width:250px" class="dash_logo">
+            <h1 class="dash_h1">Olá <span id="b_usuario">usuário</span><br>
+            seja bem vindo(a)!</h1>
+            <ul class="ul_botoes">
+                <li><a href="dashboard.html">Inicio</a> </li>
+                <li><a href="sugestoes.html">Sugestões</a> </li>
+                <li><a href="post.html">Criar Postagem</a> </li>
+                <li><a href="historico.html">Historico de Postagem</a> </li>
+                <li><a href="quiz.html">Quiz</a> </li>
+                <li onclick="limparSessao()">Sair</button>
+            </ul>
+            
         </div>
+        
     
         <div class="dash-right">
     
@@ -36,6 +38,7 @@
                     <h1>Histórico de Postagens</h1>
                 <div class="div-results">
                         <div id="feed_container" class="feed-container">
+                            <span id="span_mensagem" style="color: white;"></span>
                         </div>
                 </div>
             
@@ -95,7 +98,7 @@
             if (resposta.ok) {
                 if (resposta.status == 204) {
                     var feed = document.getElementById("feed_container");
-                    var mensagem = document.createElement("span");
+                    var mensagem = document.getElementById("span_mensagem");
                     mensagem.innerHTML = "Nenhum resultado encontrado."
                     feed.appendChild(mensagem);
                     throw "Nenhum resultado encontrado!!";

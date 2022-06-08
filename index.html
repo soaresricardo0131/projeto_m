@@ -20,8 +20,8 @@
                 <ul>
                     <li><a href="index.html" class="agora">Inicio</a></li>
                     <!-- <li><a href="analises.html">Análises</a></li> -->
-                    <li><a href="artigos.html">Artigos</a></li>
-                    <li><a href="sobre.html">Sobre o Maldito</a></li>
+                    <li><a href="galeria.html">Galeria</a></li>
+                    <!-- <li><a href="sobre.html">Sobre o Maldito</a></li> -->
                     <li><a href="contato.html">Contato</a></li>
                     <li><a href="cadastro.html">Cadastro</a></li>
                     <li><a href="login.html">Login</a></li>
@@ -49,7 +49,7 @@
                     <h2>O que eu gostaria de ver em um Resident Evil</h2>
                     <div class="sobre_artigo"><h3>Por Ricardo Soares,
                         <span class="data_post">01/05/2015</span></h3>
-                        <a href="" class="tags">artigos</a>
+                        
                     </div>
                     <div class="descricao">
                         <h4>
@@ -79,12 +79,39 @@
 
             <div class="direita">
                 <div class="div_ultimas">
-                    <h2>Categorias</h2>
+                    <h2>Próximos Lançamentos</h2>
+                </div>
+                <div class="div_lancamento">  
+                    <a href="https://callisto.sds.com/">
+                        <img src="img/img(2).jpg" style="width: 280px">
+                    </a>
+                </div>
+                    <div class="div_ultimos_lancamento">
+                        <h2>The Callisto Protocol | 02/12/2022</h2>
+                    </div>
+                
+                <div class="div_lancamento">
+                    <a href="https://www.ea.com/pt-br/games/dead-space">
+                        <img src="img/img(1).jpg" style="width: 280px">
+                    </a>
+                </div>
+                  
+                    <div class="div_ultimos_lancamento">
+                        <h2>Dead Space | 27/01/2023</h2>
+                    </div>
+   
+                    <div class="div_lancamento">
+                        <a href="https://www.residentevil.com/re4/pt-br/">
+                            <img src="img/img(0).jpg" style="width: 280px">
+                        </a>
+                    </div>
+                    <div class="div_ultimos_lancamento">
+                        <h2>Resident Evil 4 | 24/03/2023</h2>
+                    </div>
+                    
+                    
                 </div>
                 <br>
-                <div class="div_ultimas">
-                    <h2>Ultimas Análises</h2>
-                </div>
 
             </div>
             
@@ -143,7 +170,10 @@ function atualizarFeed() {
                        
 
                         <div class="descricao">
+                            <a href="artigos.html" id="link_artigo${publicacao.idPostagem}"
+                             value="${publicacao.idPostagem}" onclick="ler_artigo(${publicacao.idPostagem})">
                             <h2>${publicacao.tituloPostagem}</h2>
+                            </a>
                         <h4>
                             ${publicacao.conteudoPostagem}
                         </h4>
@@ -157,7 +187,7 @@ function atualizarFeed() {
                     
                     <div class="sobre_artigo"><h3>Por ${publicacao.nomeUsuario},
                         <span class="data_post">${publicacao.dataPost}</span></h3>
-                        <a href="artigos.html" class="tags">artigos</a>
+                        
                     </div>
                         
                         

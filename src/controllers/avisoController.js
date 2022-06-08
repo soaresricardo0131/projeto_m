@@ -106,7 +106,7 @@ function editar(req, res) {
         .catch(
             function (erro) {
                 console.log(erro);
-                console.log("Houve um erro ao realizar o post: ", erro.sqlMessage);
+                console.log("Houve um  erro ao realizar o post: ", erro.sqlMessage);
                 res.status(500).json(erro.sqlMessage);
             }
         );
@@ -114,9 +114,9 @@ function editar(req, res) {
 }
 
 function deletar(req, res) {
-    var idAviso = req.params.idAviso;
+    var idContato = req.params.idContato;
 
-    avisoModel.deletar(idAviso)
+    avisoModel.deletar(idContato)
         .then(
             function (resultado) {
                 res.json(resultado);

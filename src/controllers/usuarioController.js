@@ -94,6 +94,34 @@ function cadastrar(req, res) {
             );
     }
 }
+function cadastrar_quiz(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var id = req.body.idServer;
+    var pontos = req.body.pontosServer;
+    var acertos = req.body.acertosServer;
+ 
+
+    // Faça as validações dos valores
+    
+        
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.cadastrar_quiz(id,pontos,acertos)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro do ranking! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
 
 function contato(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
@@ -157,5 +185,6 @@ module.exports = {
     listar,
     contato,
     postar,
-    testar
+    testar,
+    cadastrar_quiz
 }

@@ -10,6 +10,9 @@ router.get("/", function (req, res) {
 router.get("/listarPosts", function (req, res) {
     postController.listarPosts(req, res);
 });
+router.get("/dadosQuiz", function (req, res) {
+    postController.dadosQuiz(req, res);
+});
 
 router.get("/listarJogos", function (req, res) {
     postController.listarJogos(req, res);
@@ -20,9 +23,6 @@ router.get("/exibirArtigos", function (req, res) {
 });
 
 
-// router.get(`/exibirArtigos/:idPostagem`, function (req, res) {
-//     postController.exibirArtigos(req, res);
-// });
 
 router.get("/listarPosts/:idUsuario", function (req, res) {
     postController.listarUsuario(req, res);

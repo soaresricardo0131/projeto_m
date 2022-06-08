@@ -8,8 +8,10 @@
     <script src="./js/funcoes.js"></script>
 </head>
 <body>
-    <div id="mensagem">
-        
+    <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+        </div>
     </div>
     <div id="header">
         <div class="container">
@@ -19,8 +21,8 @@
                 <ul>
                     <li><a href="index.html" >Inicio</a></li>
                     <!-- <li><a href="analises.html">Análises</a></li> -->
-                    <li><a href="artigos.html">Artigos</a></li>
-                    <li><a href="sobre.html">Sobre o Maldito</a></li>
+                    <li><a href="galeria.html">Galeria</a></li>
+                    <!-- <li><a href="sobre.html">Sobre o Maldito</a></li> -->
                     <li><a href="contato.html">Contato</a></li>
                     <li><a href="cadastro.html">Cadastro</a></li>
                     <li><a href="login.html" class="agora">Login</a></li>
@@ -30,6 +32,7 @@
 
     </div>
         </div>
+        
         
             <div class="div_login">
                 <div class="div_form">
@@ -60,13 +63,13 @@
         var senhaVar = input_senha.value;
 
         if (emailVar == "" || senhaVar == "") {
-            mensagem.style.display = "block"
-            mensagem.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            // finalizarAguardar();
+            cardErro.style.display = "block"
+            cardErro.innerHTML = "Preencha todos os campos para prosseguir!";
+            setInterval(sumirMensagem, 5000)
             return false;
         }
         else {
-            setInterval(sumir_div, 5000)
+            setInterval(sumirMensagem, 5000)
         }
 
         console.log("FORM LOGIN: ", emailVar);
@@ -94,8 +97,10 @@
                     sessionStorage.EMAIL_USUARIO = json.emailUsuario;
                     sessionStorage.NOME_USUARIO = json.nomeUsuario;
                     sessionStorage.ID_USUARIO = json.idUsuario;
-                    sessionStorage.JOGO_USUARIO = json.jogoUsuario;
-
+                     sessionStorage.JOGO_USUARIO = json.jogoUsuario;
+                    
+                     cardErro.style.display = "block"
+                mensagem_erro.innerHTML = "Login realizado com sucesso!";
                     setTimeout(function () {
                         window.location = "./dashboard.html";
                     }, 1000); // apenas para exibir o loading
@@ -119,8 +124,8 @@
         return false;
     }
 
-    // function sumirMensagem() {
-    //     cardErro.style.display = "none"
-    // }
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
 
 </script>

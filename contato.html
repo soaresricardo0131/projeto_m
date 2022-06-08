@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Maldito - Contato</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="./js/funcoes.js"></script>
     <!-- <style>
         *{
             border: 1px solid blue;
@@ -12,6 +13,11 @@
     </style> -->
 </head>
 <body>
+    <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+        </div>
+    </div>
     <div id="header">
         <div class="container">
             <div class="nav_bar">
@@ -20,8 +26,8 @@
                 <ul>
                     <li><a href="index.html" >Inicio</a></li>
                     <!-- <li><a href="analises.html">Análises</a></li> -->
-                    <li><a href="artigos.html">Artigos</a></li>
-                    <li><a href="sobre.html">Sobre o Maldito</a></li>
+                    <li><a href="galeria.html">Galeria</a></li>
+                    <!-- <li><a href="sobre.html">Sobre o Maldito</a></li> -->
                     <li><a href="contato.html" class="agora">Contato</a></li>
                     <li><a href="cadastro.html">Cadastro</a></li>
                     <li><a href="login.html" >Login</a></li>
@@ -85,28 +91,29 @@
         if (emailVar == "" || assuntoVar == "" || mensagemVar == "") {
             cardErro.style.display = "block"
             mensagem_erro.innerHTML = "Preencha todos os campos para prosseguir!";
-
-            finalizarAguardar();
+            setInterval(sumirMensagem, 5000)
+            ////finalizarAguardar();
             return false;
         }
         // else {
         //     setInterval(sumirMensagem, 5000)
         // }
 
-        // if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
-        //     cardErro.style.display = "block"
-        //     mensagem_erro.innerHTML = "Ops, e-mail inválido! Verifique e tente novamente.";
-        //     finalizarAguardar();
-        //     return false;
-        // }
-        // // else {
-        // //     setInterval(sumirMensagem, 5000)
-        // // }
+        if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".com") == -1) {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "Ops, e-mail inválido! Verifique e tente novamente.";
+            ////finalizarAguardar();
+            setInterval(sumirMensagem, 5000)
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
 
         // if (senhaVar != confirmacaoSenhaVar) {
         //     cardErro.style.display = "block"
         //     mensagem_erro.innerHTML = "As senhas inseridas devem ser iguais para prosseguir!";
-        //     finalizarAguardar();
+        //     //finalizarAguardar();
         //     return false;
         // }
         // // else {
@@ -128,21 +135,24 @@
                 mensagemServer: mensagemVar
             })
         }).then(function (resposta) {
-            alert("oi")
+            
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
                 cardErro.style.display = "block"
-                mensagem_erro.innerHTML = "Cadastro realizado com sucesso!";
-                window.location = "login.html";
+                mensagem_erro.innerHTML = "Contato realizado com sucesso!";
+                setInterval(sumirMensagem, 5000)
                 limparFormulario();
-                finalizarAguardar();
+                //finalizarAguardar();
             } else {
-                throw ("Houve um erro ao tentar realizar o cadastro!");
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML = "Houve um erro ao tentar realizar o contato!";
+                setInterval(sumirMensagem, 5000)
+                throw ("Houve um erro ao tentar realizar o contato!");
             }
         }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
+            //console.log(`#ERRO: ${resposta}`);
+            //finalizarAguardar();
         });
 
         return false;
@@ -151,5 +161,11 @@
     // function sumirMensagem() {
     //     cardErro.style.display = "none"
     // }
+    function limparFormulario()
+{
+    document.getElementById('input_email').value ='';
+    document.getElementById('input_assunto').value ='';
+    document.getElementById('input_mensagem').value ='';
+}
 
 </script>

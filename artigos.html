@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Maldito - Home</title>
+    <title>Blog Maldito - Artigos</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/funcoes.js"></script>
 </head>
@@ -16,10 +16,10 @@
                 
                 
                 <ul>
-                    <li><a href="index.html" class="agora">Inicio</a></li>
+                    <li><a href="index.html">Inicio</a></li>
                     <!-- <li><a href="analises.html">Análises</a></li> -->
-                    <li><a href="artigos.html">Artigos</a></li>
-                    <li><a href="sobre.html">Sobre o Maldito</a></li>
+                    <li><a href="galeria.html">Galeria</a></li>
+                    <!-- <li><a href="sobre.html">Sobre o Maldito</a></li> -->
                     <li><a href="contato.html">Contato</a></li>
                     <li><a href="cadastro.html">Cadastro</a></li>
                     <li><a href="login.html">Login</a></li>
@@ -46,20 +46,45 @@
 
                 </div>
                 <br>
+            </div>
 
-
-            <!-- <div class="direita">
-                <div class="div_ultimas">
-                    <h2>Categorias</h2>
-                </div>
-                <br>
-                <div class="div_ultimas">
-                    <h2>Ultimas Análises</h2>
-                </div>
-
-            </div> -->
+                <div class="direita">
+                    <div class="div_ultimas">
+                        <h2>Próximos Lançamentos</h2>
+                    </div>
+                    <div class="div_lancamento">  
+                        <a href="https://callisto.sds.com/">
+                            <img src="img/img(2).jpg" style="width: 280px">
+                        </a>
+                    </div>
+                        <div class="div_ultimos_lancamento">
+                            <h2>The Callisto Protocol | 02/12/2022</h2>
+                        </div>
+                    
+                    <div class="div_lancamento">
+                        <a href="https://www.ea.com/pt-br/games/dead-space">
+                            <img src="img/img(1).jpg" style="width: 280px">
+                        </a>
+                    </div>
+                      
+                        <div class="div_ultimos_lancamento">
+                            <h2>Dead Space | 27/01/2023</h2>
+                        </div>
+       
+                        <div class="div_lancamento">
+                            <a href="https://www.residentevil.com/re4/pt-br/">
+                                <img src="img/img(0).jpg" style="width: 280px">
+                            </a>
+                        </div>
+                        <div class="div_ultimos_lancamento">
+                            <h2>Resident Evil 4 | 24/03/2023</h2>
+                        </div>
+                        
+                        
+                    </div>
+                    <br>
             
-        </div>
+        
         
 
 
@@ -114,7 +139,7 @@ function atualizarFeed() {
                     <h2>${publicacao.tituloPostagem}</h2>
                     <div class="sobre_artigo"><h3>Por ${publicacao.nomeUsuario},
                         <span class="data_post">${publicacao.datapost}</span></h3>
-                        <a href="" class="tags">artigos</a>
+                        
                     </div>
                     <div class="descricao">
                         <h4>

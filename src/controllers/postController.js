@@ -81,9 +81,9 @@ function publicar(req, res) {
     }
 
     function editarPost(req, res) {
-    var novoTitulo = req.body.titulo;
-    var novaImagem = req.body.imagem;
-    var novaMensagem = req.body.mensagem;
+    var novoTitulo = req.body.tituloVar;
+    var novaImagem = req.body.imagemVar;
+    var novaMensagem = req.body.mensagemVar;
     var idPost = req.params.idPostagem;
 
     postModel.editarPost(novoTitulo, novaImagem,novaMensagem, idPost)
@@ -155,6 +155,31 @@ function exibirArtigos(req, res) {
     });
 }
 
+function dadosQuiz(req, res) {
+    
+
+    postModel.dadosQuiz()
+        .then(
+            function (resultado) {
+                if (resultado.length > 0) {
+                    res.status(200).json(resultado);
+                } else {
+                    res.status(204).send("Nenhum resultado encontrado!");
+                }
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "Houve um erro ao buscar os avisos: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
 module.exports = {
     testar,
     listarPosts,
@@ -163,6 +188,7 @@ module.exports = {
      publicar,
      exibirArtigos,
      listarJogos,
+     dadosQuiz,
     // pesquisarDescricao,
 
     // editar,

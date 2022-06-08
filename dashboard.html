@@ -9,35 +9,35 @@
     <script src="js/funcoes.js"></script>
     <!-- scripts do Chart.js -->
     <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
-
+    <style>
+        .tituloGrafico{
+            color: red;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 
-<body onload="validarSessao(), atualizarFeed()"">
+<body onload="validarSessao(), atualizarFeed()">
 
 
 
     <div class="dashboard">
         <div class="dash_esquerda">
-            <img src="img/logo.png" style="width:250px">
-            <h1>Olá <span id="b_usuario">usuário</span></h1>
+            <img src="img/logo.png" style="width:250px" class="dash_logo">
+            <h1 class="dash_h1">Olá <span id="b_usuario">usuário</span><br>
+            seja bem vindo(a)!</h1>
             <ul class="ul_botoes">
                 <li><a href="dashboard.html">Inicio</a> </li>
                 <li><a href="sugestoes.html">Sugestões</a> </li>
                 <li><a href="post.html">Criar Postagem</a> </li>
                 <li><a href="historico.html">Historico de Postagem</a> </li>
+                <li><a href="quiz.html">Quiz</a> </li>
                 <li onclick="limparSessao()">Sair</button>
             </ul>
             
         </div>
         <div class="container_dash">
 
-            <div>
-                <h1 class="tituloGrafico">
-                    Bem-vindo(a), <span class="vermelho">Estranho(a)!</span> Seu jogo favorito é:
-                    <span id="nome_jogo" class="vermelho">jogo</span>.<br>
-                    Você faz parte dos <span id="num_jogo" class="vermelho">numero</span> usuários que gostam dele.
-                </h1>
-            </div>
 
             <div class="dash">
                 <div>
@@ -47,7 +47,10 @@
                 </div>
                 <div class="graph">
                     <canvas id="canvas_grafico"></canvas>
+                   
                 </div>
+
+                
             </div>
         </div>
     </div>
@@ -59,14 +62,6 @@
 
 <script>
 
-    var alan_wake = 0;
-    var alone_dark = 0;
-    var dead_space = 0;
-    var outlast = 0;
-    var resident_evil =0;
-    var silent_hill = 0;
-    var evil_within = 0;
-    var jogo = sessionStorage.JOGO_USUARIO;
     
 
     let proximaAtualizacao;
@@ -75,8 +70,6 @@
 
 
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-    
-    nome_jogo.innerHTML = sessionStorage.JOGO_USUARIO;
     
 
     // O gráfico é construído com três funções:
@@ -94,18 +87,9 @@
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
-
-                    alan_wake = resposta[0].re;
-                    alone_dark = resposta[1].re;
-                    dead_space = resposta[2].re;
-                    outlast = resposta[3].re;
-                    resident_evil = resposta[4].re;
-                    silent_hill = resposta[5].re;
-                    evil_within = resposta[6].re;
-
-                    plotarGrafico(resposta);
                     
+
+                    plotarGrafico(resposta, );
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -120,97 +104,178 @@
     // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
     // A função *plotarGrafico* também invoca a função *atualizarGrafico*
     function plotarGrafico(resposta) {
-
-        carregar_jogo();
-        
         console.log('iniciando plotagem do gráfico...');
 
-        const nomes = [
-            'Quantidade de usuários'
-        ];
+        var dados = {
+            labels: ['Jogos Favoritos'],
+            datasets: [
+                {
+                    yAxisID: 'y-umidade',
+                    label: 'Alan Wake',
+                    borderColor: '#648498',
+                    backgroundColor: '#648498',
+                    fill: true,
+                    data: []
+                },
+                {
+                    yAxisID: 'y-umidade',
+                    label: 'Alone in the dark',
+                    borderColor: '#7a1e14',
+                    backgroundColor: '#7a1e14',
+                    fill: true,
+                    data: []
+                },
 
-        const data = {
-            labels: nomes,
-            datasets: [{
-            label: `${resposta[0].jogousuario}`,
-            backgroundColor: '#648498',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [alan_wake],
-            },
+                {
+                    yAxisID: 'y-umidade',
+                    label: 'Dead Space',
+                    borderColor: '#1c3040',
+                    backgroundColor: '#1c3040',
+                    fill: true,
+                    data: []
+                },
 
-            {
-            label: `${resposta[1].jogousuario}`,
-            backgroundColor: '#7a1e14',
-            borderColor: 'rgb(0, 255, 255)',
-            data: [alone_dark],
-            },
-            {
-            label: `${resposta[2].jogousuario}`,
-            backgroundColor: '#1c3040',
-            borderColor: 'rgb(0, 255, 255)',
-            data: [dead_space],
-            },
+                {
+                    yAxisID: 'y-umidade',
+                    label: 'Outlast',
+                    borderColor: '#80b07e',
+                    backgroundColor: '#80b07e',
+                    fill: true,
+                    data: []
+                },
 
-            {
-            label: `${resposta[3].jogousuario}`,
-            backgroundColor: '#80b07e',
-            borderColor: 'rgb(0, 255, 255)',
-            data: [outlast],
-            },
-            {
-            label: `${resposta[4].jogousuario}`,
-            backgroundColor: '#cc0404',
-            borderColor: 'rgb(0, 255, 255)',
-            data: [resident_evil],
-            },
-            {
-            label: `${resposta[5].jogousuario}`,
-            backgroundColor: '#a9a9a9',
-            borderColor: 'rgb(0, 255, 255)',
-            data: [silent_hill],
-            },
-            {
-            label: `${resposta[6].jogousuario}`,
-            backgroundColor: '#f70202',
-            borderColor: 'rgb(0, 255, 255)',
-            data: [evil_within],
-            }
+                {
+                    yAxisID: 'y-umidade',
+                    label: 'Resident Evil',
+                    borderColor: '#cc0404',
+                    backgroundColor: '#cc0404',
+                    fill: true,
+                    data: []
+                },
 
+                {
+                    yAxisID: 'y-umidade',
+                    label: 'Silent Hill',
+                    borderColor: '#a9a9a9',
+                    backgroundColor: '#a9a9a9',
+                    fill: true,
+                    data: []
+                },
+                
+                {
+                    yAxisID: 'y-temperatura',
+                    label: 'The Evil Within',
+                    borderColor: '#f70202',
+                    backgroundColor: '#f70202',
+                    fill: true,
+                    data: []
+                }
             ]
         };
-        const config = {
-            type: 'bar',
-            data: data,
-            options: {}
-        };
-        const grafico = new Chart(
-            document.getElementById('canvas_grafico'),
-            config
-        );
 
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            
+            dados.datasets[i].data.push(resposta[i].re);
+            
+
+
+
+
+        }
+
+        console.log(JSON.stringify(dados));
+
+        var ctx = canvas_grafico.getContext('2d');
+        window.grafico_linha = Chart.Bar(ctx, {
+            data: dados,
+            options: {
+                responsive: true,
+                animation: { duration: 500 },
+                hoverMode: 'index',
+                stacked: false,
+                title: {
+                    display: false,
+                    text: 'Dados capturados'
+                },
+                scales: {
+                    yAxes: [{
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        id: 'y-temperatura',
+                        ticks: {
+                            beginAtZero: true,
+                            max: 100,
+                            min: 0
+                        }
+                    }, {
+                        type: 'linear',
+                        display: false,
+                        position: 'right',
+                        id: 'y-umidade',
+                        ticks: {
+                            beginAtZero: true,
+                            max: 100,
+                            min: 0
+                        },
+
+                        gridLines: {
+                            drawOnChartArea: false,
+                        },
+                    }],
+                }
             }
- function carregar_jogo(){
-    if(jogo == 'Alan Wake'){
-        num_jogo.innerHTML = alan_wake
-    }else if(jogo == 'Alone in the dark'){
-        num_jogo.innerHTML = alone_dark
-    }
-    else if(jogo == 'Dead Space'){
-        num_jogo.innerHTML = dead_space
-    }
-    else if(jogo == 'Outlast'){
-        num_jogo.innerHTML = outlast
-    }
-    else if(jogo == 'Resident Evil'){
-        num_jogo.innerHTML = resident_evil
-    }
-    else if(jogo == 'Silent Hill'){
-        num_jogo.innerHTML = silent_hill
-    }else{
-        num_jogo.innerHTML = evil_within
-    }
+        });
+        // ==================================================================
+
         
+
+        setTimeout(() => atualizarGrafico( dados), 2000);
     }
+    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+    function atualizarGrafico( dados) {
+
+fetch(`/medidas/tempo-real/`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+        response.json().then(function (novoRegistro) {
+
+            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+            console.log(`Dados atuais do gráfico: ${dados}`);
+
+            // tirando e colocando valores no gráfico
+             dados.label.shift(); // apagar o primeiro
+            // dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+            
+            // for(var i= 0; i < novoRegistro.length;i++ ){
+            //     dados.datasets[i].data.shift();  // apagar o primeiro de umidade
+            // dados.datasets[i].data.push(novoRegistro[i].re);
+
+            // }
+            // dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+            // dados.datasets[0].data.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
+            
+
+
+            window.grafico_linha.update();
+            window.grafico_linha2.update();
+
+            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+            proximaAtualizacao = setTimeout(() => atualizarGrafico(dados), 2000);
+        });
+    } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+        proximaAtualizacao = setTimeout(() => atualizarGrafico(dados), 2000);
+    }
+})
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+
+}
  
 
 </script>

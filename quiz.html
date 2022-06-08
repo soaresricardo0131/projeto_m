@@ -3,22 +3,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Maldito - Postagem</title>
+    <title>Blog Maldito - Quiz</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="../js/funcoes.js"></script>
 
 </head>
-<body onload="validarSessao()">
+<body onload="validarSessao(),validarRanking()">
+    <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+        </div>
+    </div>
     <div class="dash_principal">
         <div class="dashboard">
             <div class="dash_esquerda">
-                <img src="img/logo.png" style="width:250px">
-                <h1>Olá, <span id="b_usuario">usuário</span></h1>
+                <img src="img/logo.png" style="width:250px" class="dash_logo">
+            <h1 class="dash_h1">Olá <span id="b_usuario">usuário</span><br>
+            seja bem vindo(a)!</h1>
                 <ul class="ul_botoes">
                     <li><a href="dashboard.html">Inicio</a> </li>
                     <li><a href="sugestoes.html">Sugestões</a> </li>
                     <li><a href="post.html">Criar Postagem</a> </li>
                     <li><a href="historico.html">Historico de Postagem</a> </li>
+                    <li><a href="quiz.html">Quiz</a> </li>
+                    
                     <li onclick="limparSessao()">Sair</button>
                 </ul>
 
@@ -28,67 +36,109 @@
 
         <div class="div_sugestao">
 
-            <form id="form_quiz" method="post" onsubmit="return publicar()" class="div_quiz">
-                <h1><span class="vermelho">Quiz</span> </h1>
+            <div id="form_quiz" method="post" onsubmit="return publicar()" class="div_quiz">
+                <div>
+                    <h1><span class="vermelho">Quiz</span> </h1>
+                </div>
+                
 
                 
                 <div class="div_perguntas">
                     <label>1) Qual personagem abaixo é fundador da Umbrela?:</label>
-                    <ul class="div_alternativas">
-                        <li><input type="radio" value="a" name="pergunta1"><label>Albert Wesker</label></li>
+                    <br>
+                    <select id="select1" class="div_alternativas">
+                        <option>Selecione</option>
+                        <option value="a">Albert Wesker</option>
+                        <option value="b">William Birkin</option>
+                        <option value="c">Ozwell E. Spencer</option>
+
+                        <!-- <li><input type="radio" value="a" name="pergunta1"><label>Albert Wesker</label></li>
                         <li><input type="radio" value="b" name="pergunta1"><label>William Birkin</label></li>
-                        <li><input type="radio" value="c" name="pergunta1"><label>Ozwell E. Spencer</label></li>
-                    </ul>
+                        <li><input type="radio" value="c" name="pergunta1"><label>Ozwell E. Spencer</label></li> -->
+                    </select><br>
                 </div>
 
-                <div class="div_perguntas">
+                <div  class="div_perguntas">
                     <label>2) "You want S.T.A.R.S? I'll give you S.T.A.R.S!" É uma frase de :</label>
-                    <ul class="div_alternativas">
-                        <li><input type="radio" value="a" name="pergunta2"><label>Chris Redfield</label></li>
+                    <br>
+                    <select id="select2" class="div_alternativas">
+                        <option value="">Selecione</option>
+                        <option value="a">Chris Redfield</option>
+                        <option value="b">Jill Valentine</option>
+                        <option value="c">Barry Burton</option>
+
+                        <!-- <li><input type="radio" value="a" name="pergunta2"><label>Chris Redfield</label></li>
                         <li><input type="radio" value="b" name="pergunta2"><label>Jill Valentine</label></li>
-                        <li><input type="radio" value="c" name="pergunta2"><label>Barry Burton</label></li>
-                    </ul>
+                        <li><input type="radio" value="c" name="pergunta2"><label>Barry Burton</label></li> -->
+                    </select><br>
                 </div>
 
                 <div class="div_perguntas">
                     <label>3) Em qual jogo a personagem Ada Wong aparece primeiro?</label>
-                    <ul class="div_alternativas">
-                        <li><input type="radio" value="a" name="pergunta3"><label>Residen evil 4</label></li>
+                    <br>
+                    <select id="select3" class="div_alternativas">
+                        <option value="">Selecione</option>
+                        <option value="a">Residen evil 4</option>
+                        <option value="b">Resident Evil 2</option>
+                        <option value="c">Resident Evil 6</option>
+                        <!-- <li><input type="radio" value="a" name="pergunta3"><label>Residen evil 4</label></li>
                         <li><input type="radio" value="b" name="pergunta3"><label>Resident Evil 2</label></li>
-                        <li><input type="radio" value="c" name="pergunta3"><label>Resident Evil 6</label></li>
-                    </ul>
+                        <li><input type="radio" value="c" name="pergunta3"><label>Resident Evil 6</label></li> -->
+                    </select>
+                    <br>
                 </div>
 
+
                 <div class="div_perguntas">
-                    <label>4) Qual o nome da filha de Ethan Winters?</label>
-                    <ul class="div_alternativas">
-                        <li><input type="radio" value="a" name="pergunta4"><label>Rosemary</label></li>
+                    <label>4) Qual o nome da filha de Ethan Winters do Resident Evil 7 e Village?</label>
+                    <br>
+                    <select id="select4" class="div_alternativas">
+                        <option>Selecione</option>
+                        <option value="a">Rosemary</option>
+                        <option value="b">Eveline</option>
+                        <option value="c">Mia</option>
+
+                        <!-- <li><input type="radio" value="a" name="pergunta4"><label>Rosemary</label></li>
                         <li><input type="radio" value="b" name="pergunta4"><label>Eveline</label></li>
-                        <li><input type="radio" value="c" name="pergunta4"><label>Mia</label></li>
-                    </ul>
+                        <li><input type="radio" value="c" name="pergunta4"><label>Mia</label></li> -->
+                    </select>
+                    <br>
                 </div>
 
                 <div class="div_perguntas">
                     <label>5) Qual foi o último Resident Evil com câmera fixa?</label>
-                    <ul class="div_alternativas">
-                        <li><input type="radio" value="a" name="pergunta5"><label>Resident Evil Zero</label></li>
+                    <br>
+                    <select id="select5" class="div_alternativas">
+                        <option value="">Selecione</option>
+                        <option value="a">Resident Evil Zero</option>
+                        <option value="b">Resident Evil - CODE: Veronica</option>
+                        <option value="c">Resident Evil: Outbreak file#2</option>
+                        <!-- <li><input type="radio" value="a" name="pergunta5"><label>Resident Evil Zero</label></li>
                         <li><input type="radio" value="b" name="pergunta5"><label>Resident Evil - CODE: Veronica</label></li>
-                        <li><input type="radio" value="c" name="pergunta5"><label>Resident Evil: Outbreak file#2</label></li>
-                    </ul>
+                        <li><input type="radio" value="c" name="pergunta5"><label>Resident Evil: Outbreak file#2</label></li> -->
+                    </select>
+                    <br>
                 </div>
 
                 <div class="div_perguntas">
                     <label>6) Qual desses produtos de RE não faz parte da cronologia?</label>
-                    <ul class="div_alternativas">
-                        <li><input type="radio" value="a" name="pergunta6"><label>Resident Evil: O Incidente de Caliban Cove</label></li>
+                    <br>
+                    <select id="select6" class="div_alternativas">
+                        <option>Selecione</option>
+                        <option value="a">Resident Evil: O Incidente de Caliban Cove</option>
+                        <option value="b">Resident Evil: No Escuro Absoluto</option>
+                        <option value="c">Resident Evil: Degeneração</option>
+
+                        <!-- <li><input type="radio" value="a" name="pergunta6"><label>Resident Evil: O Incidente de Caliban Cove</label></li>
                         <li><input type="radio" value="b" name="pergunta6"><label>Resident Evil: No Escuro Absoluto</label></li>
-                        <li><input type="radio" value="c" name="pergunta6"><label>Resident Evil: Degeneração</label></li>
-                    </ul>
+                        <li><input type="radio" value="c" name="pergunta6"><label>Resident Evil: Degeneração</label></li> -->
+                    </select>
+                    <br>
                 </div>
-                <button id="btn_post" >Enviar</button>
+                <button id="btn_form" onclick="quiz()">Enviar</button>
                 <!-- <input id="input_mensagem"> -->
                 
-            </form>
+            </div>
      
 
         </div>
@@ -98,7 +148,125 @@
 <script>
     
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    var idVar = sessionStorage.ID_USUARIO;
+    var pontosVar = 0
+    var acertosVar = 0
 
-    
+    function quiz(){
+
+        var pergunta1 = select1.value
+        var pergunta2 = select2.value
+        var pergunta3 = select3.value
+        var pergunta4 = select4.value
+        var pergunta5 = select5.value
+        var pergunta6 = select6.value
+
+        if(pergunta1=='c'){
+            pontosVar +=50
+            acertosVar++
+        }
+        if(pergunta2=='b'){
+            pontosVar +=40
+            acertosVar++
+        }
+        if(pergunta3=='b'){
+            pontosVar +=10
+            acertosVar++
+        }
+        if(pergunta4=='a'){
+            pontosVar +=20
+            acertosVar++
+        }
+        if(pergunta5=='c'){
+            pontosVar +=50
+            acertosVar++
+        }
+        if(pergunta6=='a'){
+            pontosVar +=50
+            acertosVar++
+        }
+        
+        cadastrar_quiz()
+
+
+    }
+
+    function cadastrar_quiz() {
+        
+        fetch("/usuarios/cadastrar_quiz", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+
+                
+                idServer: idVar,
+                pontosServer: pontosVar,
+                acertosServer: acertosVar
+            })
+        }).then(function (resposta) {
+            
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                cardErro.style.display = "block"
+                cardErro.innerHTML = `Parabens! Você acertou ${acertosVar}<br>
+                Isso deu...${pontosVar} pontos!<br>
+                Bora ver esse ranking.
+                `
+                setInterval(sumirMensagem, 6000)
+                
+                setInterval(function () {
+                        window.location = "./ranking.html";
+                    }, 6050);
+
+                limparFormulario();
+                
+            } else {
+                cardErro.style.display = "block"
+                cardErro.innerHTML = 
+                `
+                Forasteiro(a),você já fez o quiz!<br>
+                
+                `
+                setTimeout(function () {
+                        window.location = "./ranking.html";
+                    }, 6050);
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    function obterDadosQuiz() {
+        var ranking = 0
+
+        fetch(`/usuarios/ranking/`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    sessionStorage.PONTOS_USUARIO = json.pontuacao;
+                    sessionStorage.BOOL_USUARIO = json.realizado;
+                    
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ ranking: ${error.message}`);
+            });
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+
 
 </script>

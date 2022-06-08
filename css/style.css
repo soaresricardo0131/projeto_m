@@ -10,6 +10,9 @@ h1,h2,h3,h4,h5{
     margin: 0;
     padding: 0;;
 }
+a{
+    text-decoration: none;
+}
 h1{
     color: white;
 }
@@ -17,16 +20,24 @@ h2{
     color: #ac0d0d;
 }
 
-#mensagem{
-    margin-left: 35%;
-    margin-top: 15%;
-    position: absolute;
-    background-color: #8e8e8e;
-    color: #ac0d0d;
-    width: 350px;
-    height: 250px;
+#cardErro {
     display: none;
-}
+    background-color: #ac0d0d;
+    color: white;
+    width: 230px;
+    position: absolute;
+    border-radius: 4px;
+    border: black 3px solid;
+    padding: 10px;
+    margin-left: 30%;
+    margin-top: 20%;
+  }
+  
+  .card_erro #mensagem_erro{
+    font-weight: 500;
+    font-size: 20px;
+  }
+
 /*começo nav*/
 #header{
     display: flex;
@@ -130,11 +141,21 @@ li{
 
 .div_ultimas{
     display: flex;
-    background-color: #8e8e8e;
-
-    
+    background-color: #8e8e8e;  
     border-left:5px solid #ac0d0d;
     padding: 2%;
+}
+.div_ultimos_lancamento{
+    display: flex;
+    background-color: #2a2829;  
+    border-top:5px solid #ac0d0d;
+    border-bottom:5px solid #ac0d0d;
+    padding: 2%;
+    margin-bottom: 1%;
+
+}
+.div_ultimos_lancamento h2{
+ color: white;
 }
 
 .ultimo_artigo{
@@ -178,13 +199,28 @@ li{
 }
 /*div direita*/
 .direita{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 33%;
     background-color: white;
+    
+}
+.div_lancamento{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.div_lancamento .div_ultimas{
+    align-items: center;
+    width: 100%;
 }
 
 
 
-/*===========================================TELA LOGIN====================================== */
+/*===========================================TELA LOGIN E CADASTRO====================================== */
 .div_login{
     display: flex;
     align-items: center;
@@ -197,12 +233,16 @@ li{
     margin: 0 auto;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
     background-color: #2a2829;
     width: 400px;
     height: 450px;
     color: #ac0d0d;
     
+}
+#div_cadastro{
+    height: 550px;
+
 }
 .form_imagem{
     width: 100%;
@@ -263,6 +303,11 @@ select{
     margin-top: 2%;
     
 }
+.avisos{
+    display: flex;
+    flex-direction: column;
+   align-items: center;
+}
 .div_sugestao .div_form{
     align-items: center;
     margin: 0;
@@ -314,11 +359,17 @@ select{
     display: flex;
     justify-content: space-between;
 }
+.dash_logo{
+    margin-top: 10%;
+}
+.dash_h1{
+    margin-left: 20%;
+}
 .dash_esquerda{
     display: flex;
     flex-direction: column;
-    width: 350px;
-    height: 630px;
+    
+    height: 100vh;
     background-color: #2a2829;
     align-items: center;   
 }
@@ -424,6 +475,7 @@ select{
     margin: 0 auto;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-color: #2a2829;
     width: 400px;
 
@@ -437,4 +489,52 @@ select{
 .div_alternativas{
     display: flex;
     flex-direction: column;
+}
+/* ======================================GALERIA================================================= */
+.div_galeria_horror{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 2%;
+    
+}
+.div_galeria_horror .div_galeria{
+    align-items: center;
+    margin: 0;
+    padding: 1%;
+}
+
+.texto{
+    margin-top: 1%;
+    color: white;
+}
+.div_galeria_horror .div_galeria{
+    display: flex;
+    flex-direction: row;
+    
+    
+}
+.div_galeria{
+    flex-wrap: wrap;
+}
+.div_fotos{
+    display: flex;
+    border-bottom: 3px solid #ac0d0d;
+    
+    background-color: #2a2829;
+    padding: 1%;
+    margin: 1%;
+   
+
+}
+.div_fotos img{
+
+    width: 100%;
+    filter: grayscale(100%);
+}
+.div_fotos img:hover{
+
+    width: 100%;
+    filter: grayscale(0);
 }

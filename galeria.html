@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Maldito - Galeria</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="header">
+        <div class="container">
+            <div class="nav_bar">
+                <img src="img/logo.png" style="width:250px">
+                <!-- <h1>Blog <span id="vermelho">Maldito</span></h1> -->
+                <ul>
+                    <li><a href="index.html" >Inicio</a></li>
+                    <!-- <li><a href="analises.html">Análises</a></li> -->
+                    <li><a href="galeria.html" class="agora">Galeria</a></li>
+                    <!-- <li><a href="sobre.html">Sobre o Maldito</a></li> -->
+                    <li><a href="contato.html" >Contato</a></li>
+                    <li><a href="cadastro.html">Cadastro</a></li>
+                    <li><a href="login.html" >Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="div_galeria_horror">
+        <h1>Galeria do <span class="vermelho">Horror</span> </h1>
+        <div id="div_galeria" class="div_galeria">
+            
+        </div>
+ 
+
+    </div>
+</body>
+</html>
+
+<script>
+    var galeria = [
+    {'imagem':'galeria(0).jpg'},
+    {'imagem':'galeria(1).jpg'},
+    {'imagem':'galeria(2).jpg'},
+    {'imagem':'galeria(3).jpg'},
+    {'imagem':'galeria(4).jpg'}
+]
+
+    for (var i = 0; i <5;i++){
+        div_galeria.innerHTML +=
+        `
+        <div class="div_fotos">
+            <img src="img/${galeria[i].imagem}" style="width:250px">
+        </div>
+        
+        `
+    }
+
+</script>

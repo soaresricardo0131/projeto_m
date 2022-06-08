@@ -47,6 +47,16 @@ function exibirArtigos(idPostagem) {
     return database.executar(instrucao);
 }
 
+function dadosQuiz() {
+    console.log("ACESSEI O listarUsuario MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function exibirArtigos()");
+    var instrucao = `
+    select pontuacao,acertos,date_format(data_ranking, '%d-%m-%Y') as data_ranking, nomeUsuario from ranking
+    join usuario on idUsuario = fkNome
+    order by pontuacao desc;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 function publicar(titulo, img, mensagem,idUsuario) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function publicar(): ", titulo, img, mensagem,idUsuario);
     var instrucao = `
@@ -82,6 +92,7 @@ module.exports = {
     editarPost,
     publicar,
     exibirArtigos,
+    dadosQuiz,
     deletar
 
 }
